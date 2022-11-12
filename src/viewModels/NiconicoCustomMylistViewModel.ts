@@ -1,25 +1,39 @@
-import { ApiModel } from '@/models/ApiModel'
-import { VocaloidMusicStyle } from '@/models/VocaloidMusicModel'
-import Base from '@/viewModels/Base'
 import { Component } from 'vue-property-decorator'
+
+// Model
+import { VocaloidMusicApiModel } from '@/models/apis/VocaloidMusicApiModel'
+import { VocaloidMusicModel } from '@/models/VocaloidMusicModel'
+
+// ViewModel
+import Base from '@/viewModels/Base'
+
 
 @Component({})
 export default class NiconicoCustomMylistViewModel extends Base {
-  public async getMusicList(): Promise<Array<VocaloidMusicStyle>> {
-    const callApiResult = await ApiModel.callApi({
-      url: `${ApiModel.get_host()}/api/v1/vocaloid-music/get-music-list`,
-      body: { accessToken: "test_access_token" },
-    })
+  private musicList: Array<VocaloidMusicModel> = [];
+
+  private vocaloidMusicApiModel: VocaloidMusicApiModel;
+
+
+  constructor() {
+    super()
+    this.vocaloidMusicApiModel = new VocaloidMusicApiModel()
+  }
+
+
+  public getMusicList(): Array<VocaloidMusicModel> {
+    return this.musicList
+  }
+
+
+  public async setMusicList(): Promise<void> {
+    const callApiResult = await this.vocaloidMusicApiModel.getMusicList()
 
     if (callApiResult.status !== 'success') {
-      console.error(callApiResult.body)
-      return []
-    }
-
-    if (typeof callApiResult.body === 'string') {
-      return []
+      console.error(callApiResult.data)
+      this.musicList = []
     } else {
-      return callApiResult.body
+      this.musicList = callApiResult.data
     }
   }
 }
