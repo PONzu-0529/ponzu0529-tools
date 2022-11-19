@@ -40,11 +40,25 @@ function entry() {
 
   const path = process.cwd()
   const apiTests = fs.readdirSync(`${path}/src/tests/apis`)
+  const modelTests = fs.readdirSync(`${path}/src/tests/models`)
+  const storeTests = fs.readdirSync(`${path}/src/tests/store`)
   const viewModelTests = fs.readdirSync(`${path}/src/tests/viewModels`)
 
   apiTests.forEach(file => {
     if (!String(file).includes('TestBase.ts')) {
       Object.assign(entries, { [file.substring(0, file.length - 3)]: `${path}/src/tests/apis/${file}` })
+    }
+  })
+
+  modelTests.forEach(file => {
+    if (!String(file).includes('TestBase.ts')) {
+      Object.assign(entries, { [file.substring(0, file.length - 3)]: `${path}/src/tests/models/${file}` })
+    }
+  })
+
+  storeTests.forEach(file => {
+    if (!String(file).includes('TestBase.ts')) {
+      Object.assign(entries, { [file.substring(0, file.length - 3)]: `${path}/src/tests/store/${file}` })
     }
   })
 
