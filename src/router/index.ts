@@ -6,6 +6,7 @@ import ConvertTransfers from '@/views/ConvertTransfers.vue';
 import CreateBibliography from '@/views/CreateBibliography.vue';
 import FilterInPokemonGo from '@/views/FilterInPokemonGo.vue';
 // import NiconicoCustomMylist from '@/views/NiconicoCustomMylist.vue'
+import StreamerAssistant from '@/views/StreamerAssistant.vue';
 import Error from '@/views/Error.vue';
 
 Vue.use(VueRouter);
@@ -41,6 +42,11 @@ const routes: Array<RouteConfig> = [
   //   name: 'NiconicoCustomMylist',
   //   component: NiconicoCustomMylist
   // },
+  {
+    path: '/streamer-assistant',
+    name: 'StreamerAssistant',
+    component: StreamerAssistant
+  },
   {
     path: '*',
     name: 'error',

@@ -56,6 +56,12 @@ export default class Home extends Vue {
     //   icon: "fa-music",
     //   url: "/niconico-custom-mylist",
     // },
+    {
+      title: '配信者支援ツール',
+      description: '配信者に便利なファイルを作ります。',
+      icon: 'fa-file-video',
+      url: '/streamer-assistant',
+    },
   ];
 
   private changePage(url: string): void {
